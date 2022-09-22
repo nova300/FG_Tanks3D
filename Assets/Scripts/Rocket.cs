@@ -4,24 +4,30 @@ using UnityEngine;
 
 public class Rocket : MonoBehaviour
 {
-    [SerializeField] private float speed,upForce;
-    [SerializeField] private int burnTime = -1;
+    [SerializeField] private float force,r_force;
     [SerializeField] Rigidbody rocketBody;
+    [SerializeField] Vector3 target;
+    [SerializeField] private GameObject explosion;
+    [SerializeField] private float innacuracy;
     private bool isActive;
-    public void Initialize(float r_speed, float r_upForce, int r_burnTime){
-        burnTime = r_burnTime;
-        speed = r_speed;
-        upForce = r_upForce;
+   
+    public void Initialize(Vector3 r_target){
+        Vector3 inaccuracy = new Vector3(Random.Range(-innacuracy, innacuracy), Random.Range(-innacuracy, innacuracy), Random.Range(-innacuracy, innacuracy));
+        target = r_target + inaccuracy;
         isActive = true;
     }
-
     
-    void Update(){
-        if (isActive && !(burnTime == 0)){
-            rocketBody.MovePosition(transform.position + (transform.forward * speed * Time.deltaTime) + (transform.up * upForce * Time.deltaTime));
-            burnTime = burnTime - 1;
-        } else if(isActive){
-            isActive = false;
+    void FixedUpdate(){
+        if (isActive){
+            Vector3 direction = target - rocketBody.position;
+            direction.Normalize();
+            Vector3 r_Amount = Vector3.Cross(transform.forward, direction);
+            rocketBody.angularVelocity = r_Amount * r_force;
+            rocketBody.velocity = transform.forward * force;
+        } else {
+            GameObject newExplosion = Instantiate(explosion);
+            newExplosion.transform.position = transform.position;
+            Destroy(gameObject);
         }
     }
 
