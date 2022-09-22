@@ -7,12 +7,23 @@ public class PlayerController : MonoBehaviour
 {
     [SerializeField] private NavMeshAgent agent;
     [SerializeField] private PlayerTurn playerTurn;
-    public bool currentMode;
+    [SerializeField] private PlayerAttrib playerAttrib;
+    public bool currentMode, wait;
     public int cost;
     void Update()
     {
         if(playerTurn.IsPlayerTurn()){
-            if(currentMode){
+
+            if(wait){
+                if(agent.hasPath == false){
+                    playerAttrib.deductAP(cost);
+                    cost = 0;
+                    wait = false;
+                    Debug.LogError("done waiting");
+                }
+            }
+
+            if(currentMode && !wait){
                 
                 agent.isStopped = true;
                 
@@ -29,22 +40,21 @@ public class PlayerController : MonoBehaviour
                     }
                 }
                 if(Input.GetMouseButtonDown(1)){
-                    if(cost < 11 && agent.hasPath){
-                        //deduct cost from player ap
-                        cost = 0;
+                    if(cost <= playerAttrib.getAP() && agent.hasPath){
                         agent.isStopped = false;
-                        currentMode = false;
+                        wait = true;
+                        Debug.LogError("waiting");
                     }
                 }
             }
         
-        if(Input.GetKeyDown(KeyCode.V) && currentMode){
+        if(Input.GetKeyDown(KeyCode.V) && currentMode && !wait){
                 agent.ResetPath();
                 cost = 0;
                 agent.isStopped = false;
                 currentMode = false;
                 Debug.Log("Movement mode off");
-            } else if(Input.GetKeyDown(KeyCode.V)){
+            } else if(Input.GetKeyDown(KeyCode.V) && !wait){
                 currentMode = true;
                 Debug.Log("Movement mode");
             }
