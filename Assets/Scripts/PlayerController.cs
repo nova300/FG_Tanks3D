@@ -6,12 +6,11 @@ using UnityEngine.AI;
 public class PlayerController : MonoBehaviour
 {
     [SerializeField] private NavMeshAgent agent;
-    [SerializeField] private PlayerTurn playerTurn;
     [SerializeField] private PlayerAttrib playerAttrib;
     public int cost;
     void Update(){
 
-        if(playerTurn.IsPlayerTurn()){
+        if(playerAttrib.IsPlayerTurn()){
 
             int mode = playerAttrib.getMode();
             bool wait = playerAttrib.isWaiting();

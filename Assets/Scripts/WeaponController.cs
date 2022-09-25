@@ -4,14 +4,13 @@ using UnityEngine;
 
 public class WeaponController : MonoBehaviour
 {
-    [SerializeField] private PlayerTurn playerTurn;
     [SerializeField] private PlayerAttrib playerAttrib;
     [SerializeField] private GameObject rocket,smoke,muzzleflash,rifleHit;
     [SerializeField] private Transform offset, barrel;
     [SerializeField] private int rocketCost=1, atrifleCost=5, atrifleDamage=30;
     void Update()
     {
-        bool IsPlayerTurn = playerTurn.IsPlayerTurn();
+        bool IsPlayerTurn = playerAttrib.IsPlayerTurn();
         if(IsPlayerTurn){
 
 

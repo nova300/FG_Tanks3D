@@ -6,6 +6,7 @@ public class PlayerAttrib : MonoBehaviour
 {
     [SerializeField] public int hp=100,ap=10,apRefill=10,apMax=10,mode;
     public bool wait;
+    private int playerIndex;
 
     void Update(){
 
@@ -67,5 +68,14 @@ public class PlayerAttrib : MonoBehaviour
     public bool isWaiting(){
         return wait;
     }
+
+    public void SetPlayerTurn(int index){
+        playerIndex = index;
+    }
+
+    public bool IsPlayerTurn(){
+        return TurnManager.GetInstance().IsItPlayerTurn(playerIndex);
+    }
+
 
 }

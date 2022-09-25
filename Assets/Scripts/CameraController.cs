@@ -4,32 +4,53 @@ using UnityEngine;
 
 public class CameraController : MonoBehaviour
 {
-    [SerializeField] CameraTarget target;
-    [SerializeField] int mode;  /* mode 0 = 30dgr top view, mode 1 = 30dgr top view invert, mode 2 = inherit all */
-    private Quaternion mode0 = Quaternion.Euler(30,45,0);
     
+    [SerializeField] GameObject idleCamera;
+    private Transform target;
+    public enum Mode{
+        topview,
+        topviewInverted,
+        inheritAll
+    }
+    public Mode currentMode;
+    private Quaternion mode0 = Quaternion.Euler(30,45,0);
     private Quaternion mode1 = Quaternion.Euler(30,-135,0);
+
+
+    public void Start(){
+        
+    }
     void Update()
     {
-        if (mode == 0){
+        if (currentMode == Mode.topview){
             transform.rotation = mode0;
             transform.position = target.transform.position + new Vector3(-10, 10, -10);
         }
-        if (mode == 1){
+        if (currentMode == Mode.topviewInverted){
             transform.rotation = mode1;
             transform.position = target.transform.position + new Vector3(10, 10, 10);
         }
-        if (mode == 2){
+        if (currentMode == Mode.inheritAll){
             transform.rotation = target.transform.rotation;
             transform.position = target.transform.position;
         }
     }
 
-    public void setTarget(CameraTarget nTarget){
+    public void setTarget(Transform nTarget){
         target = nTarget;
     }
 
-    public void setMode(int nMode){
-        mode = nMode;
+    public void setMode(Mode nMode){
+        currentMode = nMode;
+    }
+
+    public void setCamera(Transform nTarget, Mode nMode){
+        target = nTarget;
+        currentMode = nMode;
+    }
+
+    public void setIdle(){
+        target = idleCamera.transform;
+        currentMode = Mode.inheritAll;
     }
 }

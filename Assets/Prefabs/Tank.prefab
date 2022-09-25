@@ -177,7 +177,6 @@ GameObject:
   - component: {fileID: 879309688504941007}
   - component: {fileID: 870270222825940358}
   - component: {fileID: 7943252791759095051}
-  - component: {fileID: 2052249882311901672}
   - component: {fileID: 6325162766717133573}
   - component: {fileID: 2075801977812097865}
   - component: {fileID: -6518443651313129610}
@@ -244,22 +243,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   agent: {fileID: 870270222825940358}
-  playerTurn: {fileID: 2052249882311901672}
   playerAttrib: {fileID: 6325162766717133573}
-  wait: 0
   cost: 0
---- !u!114 &2052249882311901672
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 879309688504941004}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 77559d5e3e2c54441ab6de80b247c748, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &6325162766717133573
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -277,6 +262,7 @@ MonoBehaviour:
   apRefill: 10
   apMax: 10
   mode: 0
+  wait: 0
 --- !u!114 &2075801977812097865
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -289,7 +275,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 658b3c0a467fd12428e11d958a4667ff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerTurn: {fileID: 2052249882311901672}
   playerAttrib: {fileID: 6325162766717133573}
   rocket: {fileID: 4447215486268647729, guid: cef6363495bb1a34bbfaa5cfd2d12850, type: 3}
   smoke: {fileID: 8008845614304803504, guid: e716320caa3d1e8408a98c436d2594af, type: 3}

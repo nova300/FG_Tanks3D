@@ -5,8 +5,9 @@ using UnityEngine;
 public class TurnManager : MonoBehaviour
 {
     private static TurnManager instance;
-    [SerializeField] private PlayerTurn playerOne;
-    [SerializeField] private PlayerTurn playerTwo;
+    [SerializeField] private PlayerAttrib playerOne;
+    [SerializeField] private PlayerAttrib playerTwo;
+    [SerializeField] private CameraController cameraController;
     [SerializeField] private float timeBetweenTurns;
     
     public int currentPlayerIndex, nextPlayerIndex;
@@ -20,7 +21,7 @@ public class TurnManager : MonoBehaviour
             nextPlayerIndex = 2;
             playerOne.SetPlayerTurn(1);
             playerTwo.SetPlayerTurn(2);
-            CameraManager.GetInstance().changeCamera(1);
+            cameraController.setCamera(playerOne.transform, CameraController.Mode.topview);
         }
     }
 
@@ -47,18 +48,18 @@ public class TurnManager : MonoBehaviour
     }
 
     public void TriggerChangeTurn(){
-        CameraManager.GetInstance().changeCamera(0);
+        cameraController.setIdle();
         waitingForNextTurn = true;
     }
 
     private void ChangeTurn(){
         if (currentPlayerIndex == 1){
             currentPlayerIndex = 2;
-            CameraManager.GetInstance().changeCamera(2);
+            cameraController.setCamera(playerTwo.transform, CameraController.Mode.topviewInverted);
         }
         else if (currentPlayerIndex == 2){
             currentPlayerIndex = 1;
-            CameraManager.GetInstance().changeCamera(1);
+            cameraController.setCamera(playerOne.transform, CameraController.Mode.topview);
         }
     }
 }
