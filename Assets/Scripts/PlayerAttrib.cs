@@ -5,6 +5,7 @@ using UnityEngine;
 public class PlayerAttrib : MonoBehaviour
 {
     [SerializeField] public int hp=100,ap=10,apRefill=10,apMax=10,mode;
+    public bool wait;
 
     void Update(){
 
@@ -56,6 +57,15 @@ public class PlayerAttrib : MonoBehaviour
 
     public void setMode(int n_mode){
         mode = n_mode;
+    }
+
+    public void setWait(bool nWait){
+        wait = nWait;
+        Debug.Log("wait = " + nWait);
+    }
+
+    public bool isWaiting(){
+        return wait;
     }
 
 }

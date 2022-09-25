@@ -8,7 +8,6 @@ public class WeaponController : MonoBehaviour
     [SerializeField] private PlayerAttrib playerAttrib;
     [SerializeField] private GameObject rocket,smoke,muzzleflash,rifleHit;
     [SerializeField] private Transform offset, barrel;
-    private bool wait;
     [SerializeField] private int rocketCost=1, atrifleCost=5, atrifleDamage=30;
     void Update()
     {
@@ -17,6 +16,8 @@ public class WeaponController : MonoBehaviour
 
 
             int mode = playerAttrib.getMode();
+            bool wait = playerAttrib.isWaiting();
+
             if(Input.GetMouseButtonDown(0) && mode == 2 && !wait && playerAttrib.apIsMoveAllowed(rocketCost)){
                     RaycastHit result;
                     Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);

@@ -9,7 +9,9 @@ public class Rocket : MonoBehaviour
     [SerializeField] Vector3 target;
     [SerializeField] private GameObject explosion;
     [SerializeField] private float innacuracy;
+    [SerializeField] private int fuse;
     private bool isActive;
+    private int timer;
    
     public void Initialize(Vector3 r_target){
         Vector3 inaccuracy = new Vector3(Random.Range(-innacuracy, innacuracy), Random.Range(-innacuracy, innacuracy), Random.Range(-innacuracy, innacuracy));
@@ -24,6 +26,10 @@ public class Rocket : MonoBehaviour
             Vector3 r_Amount = Vector3.Cross(transform.forward, direction);
             rocketBody.angularVelocity = r_Amount * r_force;
             rocketBody.velocity = transform.forward * force;
+            timer++;
+            if(timer > fuse){
+                isActive = false;
+            }
         } else {
             GameObject newExplosion = Instantiate(explosion);
             newExplosion.transform.position = transform.position;

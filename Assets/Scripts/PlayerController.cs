@@ -8,20 +8,19 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private NavMeshAgent agent;
     [SerializeField] private PlayerTurn playerTurn;
     [SerializeField] private PlayerAttrib playerAttrib;
-    public bool wait;
     public int cost;
     void Update(){
 
         if(playerTurn.IsPlayerTurn()){
 
             int mode = playerAttrib.getMode();
+            bool wait = playerAttrib.isWaiting();
 
-            if(wait){
+            if(wait && mode == 1){
                 if(agent.hasPath == false){
                     playerAttrib.deductAP(cost);
                     cost = 0;
-                    wait = false;
-                    Debug.LogError("done waiting");
+                    playerAttrib.setWait(false);
                 }
             }
 
@@ -44,8 +43,7 @@ public class PlayerController : MonoBehaviour
                 if(Input.GetMouseButtonDown(1)){
                     if(playerAttrib.apIsMoveAllowed(cost) && agent.hasPath){
                         agent.isStopped = false;
-                        wait = true;
-                        Debug.LogError("waiting");
+                        playerAttrib.setWait(true);
                     }
                 }
             }
