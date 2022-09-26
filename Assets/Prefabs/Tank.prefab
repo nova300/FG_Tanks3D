@@ -176,11 +176,11 @@ GameObject:
   m_Component:
   - component: {fileID: 879309688504941007}
   - component: {fileID: 870270222825940358}
-  - component: {fileID: 7943252791759095051}
   - component: {fileID: 6325162766717133573}
-  - component: {fileID: 2075801977812097865}
   - component: {fileID: -6518443651313129610}
   - component: {fileID: 226045489627189177}
+  - component: {fileID: 8647422328695573042}
+  - component: {fileID: 4842314025879521117}
   m_Layer: 0
   m_Name: Tank
   m_TagString: Untagged
@@ -230,21 +230,6 @@ NavMeshAgent:
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
---- !u!114 &7943252791759095051
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 879309688504941004}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b35c4386435addb448e8617d2e1608b2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  agent: {fileID: 870270222825940358}
-  playerAttrib: {fileID: 6325162766717133573}
-  cost: 0
 --- !u!114 &6325162766717133573
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -263,28 +248,6 @@ MonoBehaviour:
   apMax: 10
   mode: 0
   wait: 0
---- !u!114 &2075801977812097865
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 879309688504941004}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 658b3c0a467fd12428e11d958a4667ff, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  playerAttrib: {fileID: 6325162766717133573}
-  rocket: {fileID: 4447215486268647729, guid: cef6363495bb1a34bbfaa5cfd2d12850, type: 3}
-  smoke: {fileID: 8008845614304803504, guid: e716320caa3d1e8408a98c436d2594af, type: 3}
-  muzzleflash: {fileID: 0}
-  rifleHit: {fileID: 0}
-  offset: {fileID: 1935865843684892772}
-  barrel: {fileID: 745624400864625945}
-  rocketCost: 2
-  atrifleCost: 7
-  atrifleDamage: 40
 --- !u!54 &-6518443651313129610
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -314,6 +277,44 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1.06, y: 0.58, z: 1.66}
   m_Center: {x: 0, y: 0.3, z: 0}
+--- !u!114 &8647422328695573042
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 879309688504941004}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4adbfdceefd2e23429e5b08599cd6e95, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerAttrib: {fileID: 6325162766717133573}
+  rocket: {fileID: 4447215486268647729, guid: cef6363495bb1a34bbfaa5cfd2d12850, type: 3}
+  smoke: {fileID: 8008845614304803504, guid: e716320caa3d1e8408a98c436d2594af, type: 3}
+  offset: {fileID: 1935865843684892772}
+  barrel: {fileID: 745624400864625945}
+  rocketCost: 1
+  atrifleCost: 5
+  atrifleDamage: 30
+  moveCost: 0
+  agent: {fileID: 870270222825940358}
+--- !u!114 &4842314025879521117
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 879309688504941004}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f234ca731dac2e048b5f1e83892e616f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerAttrib: {fileID: 6325162766717133573}
+  playerActions: {fileID: 8647422328695573042}
+  currentMode: 0
+  isWaiting: 0
 --- !u!1 &879309689590700211
 GameObject:
   m_ObjectHideFlags: 0

@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class fx_Explosion : MonoBehaviour
+public class fx_Smoke : MonoBehaviour
 {
     void Start()
     {

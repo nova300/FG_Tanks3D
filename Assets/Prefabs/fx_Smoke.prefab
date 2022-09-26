@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 5996624637023540357}
   - component: {fileID: 8896472406722160609}
   - component: {fileID: 2722067265496142080}
-  - component: {fileID: 4508650194560994639}
   m_Layer: 0
   m_Name: Particle System
   m_TagString: Untagged
@@ -4871,18 +4870,6 @@ ParticleSystemRenderer:
   m_MeshWeighting2: 1
   m_MeshWeighting3: 1
   m_MaskInteraction: 0
---- !u!114 &4508650194560994639
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5717638194021100073}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fb114725f14020b4fbb8fa4a7b1f82ec, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &8008845614304803504
 GameObject:
   m_ObjectHideFlags: 0
@@ -4892,9 +4879,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7250685771282878940}
-  - component: {fileID: 8155856847625653356}
+  - component: {fileID: 2631209222248580462}
   m_Layer: 0
-  m_Name: fx_Explosion
+  m_Name: fx_Smoke
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4916,7 +4903,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &8155856847625653356
+--- !u!114 &2631209222248580462
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
