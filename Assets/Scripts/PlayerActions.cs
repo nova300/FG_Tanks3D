@@ -6,10 +6,11 @@ using UnityEngine.AI;
 public class PlayerActions : MonoBehaviour
 {
     [SerializeField] private PlayerAttrib playerAttrib;
-    [SerializeField] private GameObject rocket,smoke;
+    [SerializeField] private GameObject rocket,smoke,explosion;
     [SerializeField] private Transform offset, barrel;
     [SerializeField] private int rocketCost=1, atrifleCost=5, atrifleDamage=30;
     [SerializeField] private NavMeshAgent agent;
+    [SerializeField] private AudioSource sndCannon;
     private int moveCost;
 
     public void Start(){
@@ -47,9 +48,12 @@ public class PlayerActions : MonoBehaviour
                 GameObject otherObject = result.transform.gameObject;
                 if(otherObject.TryGetComponent(out PlayerAttrib test)){
                     otherObject.GetComponent<PlayerAttrib>().damage(atrifleDamage);
+                    GameObject newExplosion = Instantiate(explosion);
+                    newExplosion.transform.position = rifleResult.point;
                 }
             GameObject hitSmoke = Instantiate(smoke);
             hitSmoke.transform.position = rifleResult.point;
+            sndCannon.Play();
             }
         }
     }
