@@ -72,7 +72,6 @@ public class PlayerInput : MonoBehaviour
                     Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
                     bool uiBlock = UnityEngine.EventSystems.EventSystem.current.IsPointerOverGameObject();
                     if(Physics.Raycast(ray, out result, 100.0f) && !uiBlock){
-                        Debug.Log(ray.origin);
                         if(currentMode == Mode.Move){
                             playerActions.setDestination(result);
                         } else if(currentMode == Mode.Rocket){
@@ -87,32 +86,6 @@ public class PlayerInput : MonoBehaviour
                     isWaiting = true;
                     playerActions.goDestination();
                 }
-
-                if(Input.GetKeyDown(KeyCode.V) && currentMode == Mode.Move){
-                playerActions.cleanExitMoveMode();
-                currentMode = Mode.Nothing;
-                Debug.Log("Movement mode off");
-                } else if(Input.GetKeyDown(KeyCode.V)){
-                currentMode = Mode.Move;
-                Debug.Log("Movement mode");
-                }
-                if(Input.GetKeyDown(KeyCode.B) && currentMode == Mode.Rocket){
-                    currentMode = Mode.Nothing;
-                    Debug.Log("weapon mode off");
-                } else if(Input.GetKeyDown(KeyCode.B)){
-                    currentMode = Mode.Rocket;
-                    Debug.Log("weapon mode: rocket bomb");
-                }
-            
-                if(Input.GetKeyDown(KeyCode.N) && currentMode == Mode.Shell){
-                    currentMode = Mode.Nothing;
-                    Debug.Log("weapon mode off");
-                } else if(Input.GetKeyDown(KeyCode.N)){
-                    currentMode = Mode.Shell;
-                    Debug.Log("weapon mode: at rifle");
-                }
-
-
 
             } else if(currentMode == Mode.Move){
                 if(playerActions.isMoving() == false){
