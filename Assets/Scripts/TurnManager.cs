@@ -10,6 +10,7 @@ public class TurnManager : MonoBehaviour
     [SerializeField] private CameraController cameraController;
     [SerializeField] private SceneFadeController sceneFadeController;
     [SerializeField] private float timeBetweenTurns;
+    [SerializeField] private Transform playerOneCam, playerTwoCam;
     
     public int currentPlayerIndex, nextPlayerIndex, winner;
     public bool waitingForNextTurn, gameOverTurn, stop;
@@ -22,7 +23,7 @@ public class TurnManager : MonoBehaviour
             nextPlayerIndex = 2;
             playerOne.SetPlayerTurn(1);
             playerTwo.SetPlayerTurn(2);
-            cameraController.setCamera(playerOne.transform, CameraController.Mode.topview);
+            cameraController.setCamera(playerOneCam, CameraController.Mode.inheritAll);
         }
     }
 
@@ -63,11 +64,11 @@ public class TurnManager : MonoBehaviour
     private void ChangeTurn(){
         if (currentPlayerIndex == 1){
             currentPlayerIndex = 2;
-            cameraController.setCamera(playerTwo.transform, CameraController.Mode.topviewInverted);
+            cameraController.setCamera(playerTwoCam, CameraController.Mode.inheritAll);
         }
         else if (currentPlayerIndex == 2){
             currentPlayerIndex = 1;
-            cameraController.setCamera(playerOne.transform, CameraController.Mode.topview);
+            cameraController.setCamera(playerOneCam, CameraController.Mode.inheritAll);
         }
     }
 

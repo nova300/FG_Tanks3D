@@ -16,7 +16,10 @@ public class TurretRotate : MonoBehaviour
                 Vector3 direction = result.point - transform.position;
                 direction.Normalize();
                 Quaternion lookRotation = Quaternion.LookRotation(direction);
-                transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime * 2.5f);      
+                lookRotation.x = 0;
+                lookRotation.z = 0;
+                Quaternion newRotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime * 2.5f);      
+                transform.rotation = newRotation;
             } 
         }
     }

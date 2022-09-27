@@ -8,6 +8,8 @@ public class PlayerInput : MonoBehaviour
     [SerializeField] PlayerAttrib playerAttrib;
     [SerializeField] PlayerActions playerActions;
     [SerializeField] Button moveButton, rocketButton, shellButton, endTurnButton;
+    
+    [SerializeField] float camSpeed = 50;
     public enum Mode{
         Nothing,
         Move,
@@ -95,6 +97,9 @@ public class PlayerInput : MonoBehaviour
                 Debug.LogError("Wait state error, wait cancelled");
                 isWaiting = false;
             }
+
+            float rotation = Input.GetAxis("Horizontal") * camSpeed;
+            playerActions.rotateCam(rotation);
         }
     }
 }

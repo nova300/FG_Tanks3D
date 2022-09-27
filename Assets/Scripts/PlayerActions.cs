@@ -7,7 +7,7 @@ public class PlayerActions : MonoBehaviour
 {
     [SerializeField] private PlayerAttrib playerAttrib;
     [SerializeField] private GameObject rocket,smoke,explosion,indicator;
-    [SerializeField] private Transform offset, barrel;
+    [SerializeField] private Transform offset, barrel, camRotation;
     [SerializeField] private int rocketCost=1, atrifleCost=5, atrifleDamage=30;
     [SerializeField] private NavMeshAgent agent;
     [SerializeField] private AudioSource sndCannon;
@@ -20,21 +20,26 @@ public class PlayerActions : MonoBehaviour
     public void Update(){
         if(agent.hasPath && agent.isStopped){
             moveCost = (int)agent.remainingDistance;
-            if (moveCost > playerAttrib.getAP()){
-                moveIndicator = Instantiate(indicator);
-                moveIndicator.transform.position = agent.destination;
+            if (moveCost < playerAttrib.getAP()){
+                if (moveIndicator == null){
+                    moveIndicator = Instantiate(indicator);
+                    moveIndicator.transform.position = agent.destination;
+                } else {
+                    moveIndicator.transform.position = agent.destination;
+                }
             } else {
                 destroyMoveIndicator();
-            }
+            }  
+        } else {
+            destroyMoveIndicator();
         }
-        RaycastHit result;
-        Vector3 theRay = transform.TransformDirection(Vector3.down);
-        if (Physics.Raycast(transform.position, theRay, out result))
+        /*RaycastHit hit;
+        if (Physics.Raycast(transform.position, -transform.up, out hit))
         {
-            var GroundDis = result.distance;
-            Quaternion targetRotation = Quaternion.FromToRotation(Vector3.up, result.normal);
-            transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, Time.deltaTime * 3.0f);
-        }
+            Debug.Log(hit.collider.name);
+            var slopeRotation = Quaternion.FromToRotation(transform.up, hit.normal);
+            transform.rotation = Quaternion.Slerp(transform.rotation, slopeRotation * transform.rotation, 10 * Time.deltaTime);
+        }*/
 
         
     }
@@ -106,5 +111,9 @@ public class PlayerActions : MonoBehaviour
         if (!(moveIndicator == null)){
             Destroy(moveIndicator);
         }
+    }
+
+    public void rotateCam(float speed){
+        camRotation.Rotate(0, speed * Time.deltaTime, 0);
     }
 }
