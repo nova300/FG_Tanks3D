@@ -5,13 +5,14 @@ using UnityEngine;
 public class TurnManager : MonoBehaviour
 {
     private static TurnManager instance;
-    [SerializeField] private PlayerAttrib playerOne;
-    [SerializeField] private PlayerAttrib playerTwo;
+    [SerializeField] private PlayerAttrib playerOne, playerTwo;
+    [SerializeField] private int numberOfPlayers = 2;
     [SerializeField] private CameraController cameraController;
+    [SerializeField] private SceneFadeController sceneFadeController;
     [SerializeField] private float timeBetweenTurns;
     
-    public int currentPlayerIndex, nextPlayerIndex;
-    public bool waitingForNextTurn;
+    public int currentPlayerIndex, nextPlayerIndex, winner;
+    public bool waitingForNextTurn, gameOverTurn, stop;
     private float turnDelay;
 
     private void Awake(){
@@ -26,13 +27,20 @@ public class TurnManager : MonoBehaviour
     }
 
     private void Update(){
-        if (waitingForNextTurn){
+        if (waitingForNextTurn && !gameOverTurn){
             turnDelay += Time.deltaTime;
             if (turnDelay >= timeBetweenTurns){
                 turnDelay = 0;
                 waitingForNextTurn = false;
                 ChangeTurn();
             }
+        }
+        if (gameOverTurn && !stop){
+            stop = true;
+            winner = getWinner();
+            PlayerPrefs.SetInt("winner", winner);
+            TriggerChangeTurn();
+            StartCoroutine(sceneFadeController.fadeOutAndLoadScene("GameOver"));
         }
     }
 
@@ -60,6 +68,33 @@ public class TurnManager : MonoBehaviour
         else if (currentPlayerIndex == 2){
             currentPlayerIndex = 1;
             cameraController.setCamera(playerOne.transform, CameraController.Mode.topview);
+        }
+    }
+
+    public void playerKill(){
+        numberOfPlayers--;
+        if (numberOfPlayers <= 1){
+            gameOverTurn = true;
+        }
+    }
+
+    private PlayerAttrib indexToPlayer(int index){
+        if (index == 1){
+            return playerOne;
+        } else if (index == 2){
+            return playerTwo;
+        } else {
+            return null;
+        }
+    }
+
+    private int getWinner(){
+        if (!playerOne.dead){
+            return 1;
+        } else if (!playerTwo.dead){
+            return 2;
+        } else {
+            return 0;
         }
     }
 }

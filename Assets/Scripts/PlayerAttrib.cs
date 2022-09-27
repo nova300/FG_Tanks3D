@@ -5,8 +5,13 @@ using UnityEngine;
 public class PlayerAttrib : MonoBehaviour
 {
     [SerializeField] public int hp=100,ap=10,apRefill=10,apMax=10,mode;
-    public bool wait;
+    [SerializeField] private TurnManager turnManager;
+    public bool wait,dead;
     private int playerIndex;
+
+    void Start(){
+        
+    }
 
     void Update(){
 
@@ -20,9 +25,9 @@ public class PlayerAttrib : MonoBehaviour
         }
 
         /* Health point logic */
-        if(hp < 1){
-            //kill the player
-
+        if(hp < 1 && dead == false){
+            dead = true;
+            turnManager.playerKill();
         }
 
     }
@@ -76,6 +81,13 @@ public class PlayerAttrib : MonoBehaviour
     public bool IsPlayerTurn(){
         return TurnManager.GetInstance().IsItPlayerTurn(playerIndex);
     }
+
+    public bool getDead(){
+        return dead;
+    }
+
+
+    
 
 
 }

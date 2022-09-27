@@ -2,28 +2,24 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-using UnityEngine.SceneManagement;
 
 public class MainMenu : MonoBehaviour
 {
-    [SerializeField] Button startButton;
+    [SerializeField] Button startButton,settingsButton;
     [SerializeField] SceneFadeController sceneFadeController;
 
     void Start()
     {
         startButton.onClick.AddListener(startPressed);
-    }
-
-    
-    void Update()
-    {
-        if(Input.GetKeyDown(KeyCode.Space)){
-            
-        }
+        settingsButton.onClick.AddListener(settingsPressed);
     }
 
     void startPressed(){
         StartCoroutine(sceneFadeController.fadeOutAndLoadScene("Island"));
+    }
+
+    void settingsPressed(){
+        StartCoroutine(sceneFadeController.fadeOutAndLoadScene("SettingsMenu"));
     }
 
     

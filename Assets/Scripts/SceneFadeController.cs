@@ -8,10 +8,14 @@ public class SceneFadeController : MonoBehaviour
 {
     [SerializeField] Image fadeOutImage;
     private IEnumerator coroutine;
+    private bool isActive;
 
     void OnEnable(){
+        isActive = true;
         StartCoroutine(fadeOut(false));
     }
+
+
     public IEnumerator fadeOut(bool fade = true, float fadeSpeed = 0.5f){
         Color objectColor = fadeOutImage.color;
         float fadeAmount;
@@ -22,6 +26,7 @@ public class SceneFadeController : MonoBehaviour
                 fadeOutImage.color = objectColor;
                 yield return null;
             }
+            isActive = false;
         }else {
             while(fadeOutImage.color.a > 0){
                 fadeAmount = objectColor.a - (fadeSpeed * Time.deltaTime);
@@ -29,10 +34,15 @@ public class SceneFadeController : MonoBehaviour
                 fadeOutImage.color = objectColor;
                 yield return null;
             }
+            isActive = false;
         }
     }
     public IEnumerator fadeOutAndLoadScene(string sceneToLoad, bool fade = true, float fadeSpeed = 0.5f){
-        yield return fadeOut(fade, fadeSpeed);
-        SceneManager.LoadScene(sceneToLoad);
+        if (!isActive){
+            isActive = true;
+            Debug.Log(isActive);
+            yield return fadeOut(fade, fadeSpeed);
+            SceneManager.LoadScene(sceneToLoad);
+        }
     }
 }
