@@ -4,8 +4,13 @@ using UnityEngine;
 
 public class CameraBillboard : MonoBehaviour
 {
+  [SerializeField] bool lockZ = true;
    private void LateUpdate()
      {
-         transform.forward = new Vector3(Camera.main.transform.forward.x, transform.forward.y, Camera.main.transform.forward.z);
+        if (lockZ){
+          transform.forward = new Vector3(Camera.main.transform.forward.x, transform.forward.y, Camera.main.transform.forward.z);
+        } else {
+          transform.forward = Camera.main.transform.forward;
+        }
      }
 }

@@ -20,28 +20,19 @@ public class PlayerActions : MonoBehaviour
     public void Update(){
         if(agent.hasPath && agent.isStopped){
             moveCost = (int)agent.remainingDistance;
-            if (moveCost < playerAttrib.getAP()){
+            if (moveCost <= playerAttrib.getAP()){
                 if (moveIndicator == null){
                     moveIndicator = Instantiate(indicator);
                     moveIndicator.transform.position = agent.destination;
                 } else {
                     moveIndicator.transform.position = agent.destination;
                 }
-            } else {
+            } else  {
                 destroyMoveIndicator();
             }  
-        } else {
+        } else if(!agent.hasPath) {
             destroyMoveIndicator();
         }
-        /*RaycastHit hit;
-        if (Physics.Raycast(transform.position, -transform.up, out hit))
-        {
-            Debug.Log(hit.collider.name);
-            var slopeRotation = Quaternion.FromToRotation(transform.up, hit.normal);
-            transform.rotation = Quaternion.Slerp(transform.rotation, slopeRotation * transform.rotation, 10 * Time.deltaTime);
-        }*/
-
-        
     }
 
 
@@ -67,7 +58,7 @@ public class PlayerActions : MonoBehaviour
             Vector3 direction = result.point - barrel.transform.position;
             bool hit = Physics.Raycast(barrel.transform.position, direction, out rifleResult, 100.0f);
             if(hit){
-                GameObject otherObject = result.transform.gameObject;
+                GameObject otherObject = rifleResult.transform.gameObject;
                 if(otherObject.TryGetComponent(out PlayerAttrib test)){
                     otherObject.GetComponent<PlayerAttrib>().damage(atrifleDamage);
                     GameObject newExplosion = Instantiate(explosion);

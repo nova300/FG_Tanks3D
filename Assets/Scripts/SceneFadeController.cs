@@ -40,7 +40,6 @@ public class SceneFadeController : MonoBehaviour
     public IEnumerator fadeOutAndLoadScene(string sceneToLoad, bool fade = true, float fadeSpeed = 0.5f){
         if (!isActive){
             isActive = true;
-            Debug.Log(isActive);
             yield return fadeOut(fade, fadeSpeed);
             SceneManager.LoadScene(sceneToLoad);
         }

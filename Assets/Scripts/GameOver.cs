@@ -6,6 +6,8 @@ using UnityEngine.UI;
 public class GameOver : MonoBehaviour
 {
     [SerializeField] private Image p1Win,p2Win,draw;
+    [SerializeField] private Button restart, exit;
+    [SerializeField] private SceneFadeController sceneFadeController;
     public int winner = 1;
     public float fadeSpeed = 1.0f;
     private bool invert;
@@ -14,6 +16,20 @@ public class GameOver : MonoBehaviour
     void OnEnable(){
         winner = PlayerPrefs.GetInt("winner");
         Debug.Log(winner);
+    }
+
+    void Start()
+    {
+        restart.onClick.AddListener(restartPressed);
+        exit.onClick.AddListener(exitPressed);
+    }
+
+    void restartPressed(){
+        StartCoroutine(sceneFadeController.fadeOutAndLoadScene("Island"));
+    }
+
+    void exitPressed(){
+        StartCoroutine(sceneFadeController.fadeOutAndLoadScene("MainMenu"));
     }
     void Update(){
         float fadeAmount;
