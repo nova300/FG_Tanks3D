@@ -82,7 +82,7 @@ public class PlayerInput : MonoBehaviour
                     }
                 }
 
-                if(Input.GetMouseButtonDown(1)){
+                if(Input.GetMouseButtonDown(1) && currentMode == Mode.Move){
                     isWaiting = true;
                     playerActions.goDestination();
                 }
