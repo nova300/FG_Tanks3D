@@ -11,6 +11,7 @@ public class TurnManager : MonoBehaviour
     [SerializeField] private SceneFadeController sceneFadeController;
     [SerializeField] private float timeBetweenTurns;
     [SerializeField] private Transform playerOneCam, playerTwoCam;
+    [SerializeField] public Hud hud;
     
     public int currentPlayerIndex, nextPlayerIndex, winner;
     public bool waitingForNextTurn, gameOverTurn, stop;
@@ -57,6 +58,7 @@ public class TurnManager : MonoBehaviour
     }
 
     public void TriggerChangeTurn(){
+        hud.noHud();
         cameraController.setIdle();
         waitingForNextTurn = true;
     }

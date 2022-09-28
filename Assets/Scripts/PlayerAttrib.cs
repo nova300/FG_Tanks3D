@@ -5,7 +5,8 @@ using UnityEngine;
 public class PlayerAttrib : MonoBehaviour
 {
     [SerializeField] public int hp=100,ap=10,apRefill=10,apMax=10,mode;
-    [SerializeField] private TurnManager turnManager;
+    [SerializeField] public TurnManager turnManager;
+    
     public bool wait,dead;
     private int playerIndex;
 
@@ -29,6 +30,12 @@ public class PlayerAttrib : MonoBehaviour
             dead = true;
             turnManager.playerKill();
         }
+
+        if (IsPlayerTurn()){
+            turnManager.hud.setHud(hp, ap);
+        }
+
+        
 
     }
 

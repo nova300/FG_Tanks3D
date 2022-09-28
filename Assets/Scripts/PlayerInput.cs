@@ -5,11 +5,11 @@ using UnityEngine.UI;
 
 public class PlayerInput : MonoBehaviour
 {
-    [SerializeField] PlayerAttrib playerAttrib;
     [SerializeField] PlayerActions playerActions;
-    [SerializeField] Button moveButton, rocketButton, shellButton, endTurnButton;
-    
+    [SerializeField] Toggle moveButton, rocketButton, shellButton;
+    PlayerAttrib playerAttrib;
     [SerializeField] float camSpeed = 50;
+    bool moveEnable;
     public enum Mode{
         Nothing,
         Move,
@@ -20,49 +20,47 @@ public class PlayerInput : MonoBehaviour
     public bool isWaiting;
 
     void Start(){
-        moveButton.onClick.AddListener(movePressed);
-        shellButton.onClick.AddListener(shellPressed);
-        rocketButton.onClick.AddListener(rocketPressed);
+        playerAttrib = playerActions.playerAttrib;
+        moveButton.onValueChanged.AddListener(movePressed);
+        shellButton.onValueChanged.AddListener(shellPressed);
+        rocketButton.onValueChanged.AddListener(rocketPressed);
     }
 
-    private void movePressed(){
-        if(playerAttrib.IsPlayerTurn() && !isWaiting){
-            if(currentMode == Mode.Move){
-                playerActions.cleanExitMoveMode();
-                currentMode = Mode.Nothing;
-                Debug.Log("movement mode off");
-            } else {
-                currentMode = Mode.Move;
-                Debug.Log("movement mode on");
+    private void movePressed(bool active){
+            if(playerAttrib.IsPlayerTurn() && !isWaiting){
+                if(currentMode == Mode.Move && !active){
+                    playerActions.cleanExitMoveMode();
+                    currentMode = Mode.Nothing;
+                    //Debug.Log("movement mode off");
+                } else {
+                    currentMode = Mode.Move;
+                    //Debug.Log("movement mode on");
+                }
             }
-
+    }
+    private void shellPressed(bool active){
+            if(playerAttrib.IsPlayerTurn() && !isWaiting){
+                if(currentMode == Mode.Shell && !active){
+                    currentMode = Mode.Nothing;
+                    
+                    //Debug.Log("shell mode off");
+                } else {
+                    playerActions.cleanExitMoveMode();
+                    currentMode = Mode.Shell;
+                    //Debug.Log("shell mode on");
+                }
         }
     }
-    private void shellPressed(){
-        if(playerAttrib.IsPlayerTurn() && !isWaiting){
-            if(currentMode == Mode.Shell){
-                currentMode = Mode.Nothing;
-                
-                Debug.Log("shell mode off");
-            } else {
-                playerActions.cleanExitMoveMode();
-                currentMode = Mode.Shell;
-                Debug.Log("shell mode on");
-            }
-
-        }
-    }
-    private void rocketPressed(){
-        if(playerAttrib.IsPlayerTurn() && !isWaiting){
-            if(currentMode == Mode.Rocket){
-                currentMode = Mode.Nothing;
-                Debug.Log("rocket mode off");
-            } else {
-                playerActions.cleanExitMoveMode();
-                currentMode = Mode.Rocket;
-                Debug.Log("rocket mode on");
-            }
-
+    private void rocketPressed(bool active){
+            if(playerAttrib.IsPlayerTurn() && !isWaiting){
+                if(currentMode == Mode.Rocket && !active){
+                    currentMode = Mode.Nothing;
+                    //Debug.Log("rocket mode off");
+                } else {
+                    playerActions.cleanExitMoveMode();
+                    currentMode = Mode.Rocket;
+                    //ebug.Log("rocket mode on");
+                }
         }
     }
     void Update()
@@ -100,6 +98,8 @@ public class PlayerInput : MonoBehaviour
 
             float rotation = Input.GetAxis("Horizontal") * camSpeed;
             playerActions.rotateCam(rotation);
+        } else if (!(currentMode == 0)){
+            currentMode = 0;
         }
     }
 }

@@ -5,7 +5,7 @@ using UnityEngine.AI;
 
 public class PlayerActions : MonoBehaviour
 {
-    [SerializeField] private PlayerAttrib playerAttrib;
+    [SerializeField] public PlayerAttrib playerAttrib;
     [SerializeField] private GameObject rocket,smoke,explosion,indicator;
     [SerializeField] private Transform offset, barrel, camRotation;
     [SerializeField] private int rocketCost=1, atrifleCost=5, atrifleDamage=30;
@@ -21,6 +21,7 @@ public class PlayerActions : MonoBehaviour
         if(agent.hasPath && agent.isStopped){
             moveCost = (int)agent.remainingDistance;
             if (moveCost <= playerAttrib.getAP()){
+                playerAttrib.turnManager.hud.setMoveCost(moveCost);
                 if (moveIndicator == null){
                     moveIndicator = Instantiate(indicator);
                     moveIndicator.transform.position = agent.destination;
@@ -28,6 +29,7 @@ public class PlayerActions : MonoBehaviour
                     moveIndicator.transform.position = agent.destination;
                 }
             } else  {
+                playerAttrib.turnManager.hud.setMoveCost(0);
                 destroyMoveIndicator();
             }  
         } else if(!agent.hasPath) {
@@ -80,6 +82,7 @@ public class PlayerActions : MonoBehaviour
     public void goDestination(){
         if(playerAttrib.apIsMoveAllowed(moveCost)){
             playerAttrib.deductAP(moveCost);
+            playerAttrib.turnManager.hud.setMoveCost(0);
             agent.isStopped = false;
         }
     }
@@ -96,6 +99,7 @@ public class PlayerActions : MonoBehaviour
         agent.isStopped = true;
         agent.ResetPath();
         moveCost = 0;
+        playerAttrib.turnManager.hud.setMoveCost(moveCost);
     }
 
     public void destroyMoveIndicator(){
