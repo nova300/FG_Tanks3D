@@ -24,7 +24,7 @@ public class TurnManager : MonoBehaviour
             nextPlayerIndex = 2;
             playerOne.SetPlayerTurn(1);
             playerTwo.SetPlayerTurn(2);
-            cameraController.setCamera(playerOneCam, CameraController.Mode.inheritAll);
+            cameraController.setCamera(playerOneCam);
         }
     }
 
@@ -66,11 +66,11 @@ public class TurnManager : MonoBehaviour
     private void ChangeTurn(){
         if (currentPlayerIndex == 1){
             currentPlayerIndex = 2;
-            cameraController.setCamera(playerTwoCam, CameraController.Mode.inheritAll);
+            cameraController.setCamera(playerTwoCam);
         }
         else if (currentPlayerIndex == 2){
             currentPlayerIndex = 1;
-            cameraController.setCamera(playerOneCam, CameraController.Mode.inheritAll);
+            cameraController.setCamera(playerOneCam);
         }
     }
 
@@ -78,16 +78,6 @@ public class TurnManager : MonoBehaviour
         numberOfPlayers--;
         if (numberOfPlayers <= 1){
             gameOverTurn = true;
-        }
-    }
-
-    private PlayerAttrib indexToPlayer(int index){
-        if (index == 1){
-            return playerOne;
-        } else if (index == 2){
-            return playerTwo;
-        } else {
-            return null;
         }
     }
 

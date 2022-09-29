@@ -7,7 +7,7 @@ public class PlayerAttrib : MonoBehaviour
     [SerializeField] public int hp=100,ap=10,apRefill=10,apMax=10,mode;
     [SerializeField] public TurnManager turnManager;
     
-    public bool wait,dead;
+    public bool dead;
     private int playerIndex;
 
     void Start(){
@@ -45,7 +45,7 @@ public class PlayerAttrib : MonoBehaviour
 
     public void damage(int amount){
         hp = hp - amount;
-        Debug.Log("player damaged for " + amount + " points");
+        Debug.Log("player " + playerIndex + " damaged for " + amount + " points");
     }
 
     public int getAP(){
@@ -53,7 +53,7 @@ public class PlayerAttrib : MonoBehaviour
     }
 
     public bool apIsMoveAllowed(int cost){
-        if(ap >= cost){
+        if(ap >= cost && cost > 0){
             return true;
         } else {
             return false;
@@ -62,23 +62,6 @@ public class PlayerAttrib : MonoBehaviour
 
     public void deductAP(int amount){
         ap = ap - amount;
-    }
-
-    public int getMode(){
-        return mode;
-    }
-
-    public void setMode(int n_mode){
-        mode = n_mode;
-    }
-
-    public void setWait(bool nWait){
-        wait = nWait;
-        Debug.Log("wait = " + nWait);
-    }
-
-    public bool isWaiting(){
-        return wait;
     }
 
     public void SetPlayerTurn(int index){
@@ -92,9 +75,4 @@ public class PlayerAttrib : MonoBehaviour
     public bool getDead(){
         return dead;
     }
-
-
-    
-
-
 }

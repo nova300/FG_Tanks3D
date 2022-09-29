@@ -38,7 +38,4 @@ public class Hud : MonoBehaviour
     public void setMoveCost(int newMoveCost){
         moveCost = newMoveCost;
     }
-
-
-
 }

@@ -31,10 +31,8 @@ public class PlayerInput : MonoBehaviour
                 if(currentMode == Mode.Move && !active){
                     playerActions.cleanExitMoveMode();
                     currentMode = Mode.Nothing;
-                    //Debug.Log("movement mode off");
                 } else {
                     currentMode = Mode.Move;
-                    //Debug.Log("movement mode on");
                 }
             } else if (playerAttrib.IsPlayerTurn() && !active){
                 moveButton.SetIsOnWithoutNotify(true);
@@ -44,12 +42,9 @@ public class PlayerInput : MonoBehaviour
             if(playerAttrib.IsPlayerTurn() && !isWaiting){
                 if(currentMode == Mode.Shell && !active){
                     currentMode = Mode.Nothing;
-                    
-                    //Debug.Log("shell mode off");
                 } else {
                     playerActions.cleanExitMoveMode();
                     currentMode = Mode.Shell;
-                    //Debug.Log("shell mode on");
                 }
         } else if (playerAttrib.IsPlayerTurn() && active){
                 shellButton.isOn = false;
@@ -59,11 +54,9 @@ public class PlayerInput : MonoBehaviour
             if(playerAttrib.IsPlayerTurn() && !isWaiting){
                 if(currentMode == Mode.Rocket && !active){
                     currentMode = Mode.Nothing;
-                    //Debug.Log("rocket mode off");
                 } else {
                     playerActions.cleanExitMoveMode();
                     currentMode = Mode.Rocket;
-                    //ebug.Log("rocket mode on");
                 }
         } else if (playerAttrib.IsPlayerTurn() && active){
                 rocketButton.isOn = false;
