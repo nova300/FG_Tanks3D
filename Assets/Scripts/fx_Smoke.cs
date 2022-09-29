@@ -6,7 +6,7 @@ public class fx_Smoke : MonoBehaviour
 {
     void Start()
     {
-        Destroy(gameObject, 5.0f);
+        Destroy(gameObject, 2.0f);
     }
 
 }
