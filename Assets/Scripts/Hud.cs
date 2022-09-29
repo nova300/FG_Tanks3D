@@ -10,9 +10,16 @@ public class Hud : MonoBehaviour
     [SerializeField] TextMeshProUGUI hp, ap;
     [SerializeField] ToggleGroup toggleGroup;
     int moveCost;
+    bool hudOn;
 
+    void Update(){
+        if(!hudOn && toggleGroup.AnyTogglesOn()){
+            toggleGroup.SetAllTogglesOff();
+        }
+    }
 
     public void setHud(int hpVal, int apVal){
+        hudOn = true;
         if(moveCost >= 1){
             ap.SetText("AP: " + apVal + " (-" + moveCost + ")");
         } else {
@@ -22,6 +29,7 @@ public class Hud : MonoBehaviour
     }
 
     public void noHud(){
+        hudOn = false;
         ap.SetText("");
         hp.SetText("");
         toggleGroup.SetAllTogglesOff();

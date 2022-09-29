@@ -36,6 +36,8 @@ public class PlayerInput : MonoBehaviour
                     currentMode = Mode.Move;
                     //Debug.Log("movement mode on");
                 }
+            } else if (playerAttrib.IsPlayerTurn() && !active){
+                moveButton.SetIsOnWithoutNotify(true);
             }
     }
     private void shellPressed(bool active){
@@ -49,6 +51,8 @@ public class PlayerInput : MonoBehaviour
                     currentMode = Mode.Shell;
                     //Debug.Log("shell mode on");
                 }
+        } else if (playerAttrib.IsPlayerTurn() && active){
+                shellButton.isOn = false;
         }
     }
     private void rocketPressed(bool active){
@@ -61,6 +65,8 @@ public class PlayerInput : MonoBehaviour
                     currentMode = Mode.Rocket;
                     //ebug.Log("rocket mode on");
                 }
+        } else if (playerAttrib.IsPlayerTurn() && active){
+                rocketButton.isOn = false;
         }
     }
     void Update()
@@ -92,7 +98,6 @@ public class PlayerInput : MonoBehaviour
                     isWaiting = false;
                 }
             } else{
-                Debug.LogError("Wait state error, wait cancelled");
                 isWaiting = false;
             }
 

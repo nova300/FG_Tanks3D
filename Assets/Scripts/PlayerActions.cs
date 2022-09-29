@@ -19,7 +19,7 @@ public class PlayerActions : MonoBehaviour
     }
     public void Update(){
         if(agent.hasPath && agent.isStopped){
-            moveCost = (int)agent.remainingDistance;
+            moveCost = (int)(6 * (agent.remainingDistance / 10));
             if (moveCost <= playerAttrib.getAP()){
                 playerAttrib.turnManager.hud.setMoveCost(moveCost);
                 if (moveIndicator == null){
