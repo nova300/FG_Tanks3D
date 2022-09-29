@@ -34,6 +34,11 @@ public class PlayerActions : MonoBehaviour
             }  
         } else if(!agent.hasPath) {
             destroyMoveIndicator();
+            if (!agent.isStopped){
+                playerAttrib.deductAP(moveCost);
+                agent.isStopped = true;
+            }
+            
         }
     }
 
@@ -81,7 +86,6 @@ public class PlayerActions : MonoBehaviour
 
     public void goDestination(){
         if(playerAttrib.apIsMoveAllowed(moveCost)){
-            playerAttrib.deductAP(moveCost);
             playerAttrib.turnManager.hud.setMoveCost(0);
             agent.isStopped = false;
         }
