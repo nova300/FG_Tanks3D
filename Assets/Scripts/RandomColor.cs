@@ -8,7 +8,7 @@ public class RandomColor : MonoBehaviour
     void Start()
     {
         Color randomColor = GetRandomColor();
-        colorObject.GetComponent<MeshRenderer>().material.color = GetRandomColor();
+        colorObject.GetComponent<MeshRenderer>().material.color = randomColor;
     }
 
     private Color GetRandomColor()
