@@ -278,7 +278,6 @@ MonoBehaviour:
   apMax: 10
   mode: 0
   turnManager: {fileID: 0}
-  wait: 0
   dead: 0
 --- !u!54 &-6518443651313129610
 Rigidbody:
@@ -362,7 +361,7 @@ AudioSource:
   m_GameObject: {fileID: 879309688504941004}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: 24300002, guid: 45ec588e505a2ca42b681834f90ede9b, type: 2}
   m_audioClip: {fileID: 8300000, guid: 2f08c8c7c1ca05d4eb25cc5ac4a0fd3d, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 0.5

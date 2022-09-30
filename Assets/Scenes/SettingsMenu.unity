@@ -1204,7 +1204,7 @@ AudioSource:
   m_GameObject: {fileID: 737585267}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: 24300002, guid: 45ec588e505a2ca42b681834f90ede9b, type: 2}
   m_audioClip: {fileID: 8300000, guid: 873a2ae1eef70ac809ed21c84dc3acaf, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 0.2
@@ -1304,6 +1304,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   exitButton: {fileID: 659817484}
+  slider: {fileID: 1740124614}
+  audioMixer: {fileID: 24100000, guid: 45ec588e505a2ca42b681834f90ede9b, type: 2}
   sceneFadeController: {fileID: 737585269}
 --- !u!1 &920443404
 GameObject:
@@ -1664,13 +1666,25 @@ MonoBehaviour:
   m_FillRect: {fileID: 1452642812}
   m_HandleRect: {fileID: 620447080}
   m_Direction: 0
-  m_MinValue: 0
+  m_MinValue: 0.0001
   m_MaxValue: 1
   m_WholeNumbers: 0
-  m_Value: 0.5
+  m_Value: 1
   m_OnValueChanged:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 737585271}
+        m_TargetAssemblyTypeName: SettingsMenu, Assembly-CSharp
+        m_MethodName: SetLevel
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &1788143068
 GameObject:
   m_ObjectHideFlags: 0
