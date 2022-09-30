@@ -18,8 +18,7 @@ public class GameOver : MonoBehaviour
         Debug.Log(winner);
     }
 
-    void Start()
-    {
+    void Start(){
         restart.onClick.AddListener(restartPressed);
         exit.onClick.AddListener(exitPressed);
     }

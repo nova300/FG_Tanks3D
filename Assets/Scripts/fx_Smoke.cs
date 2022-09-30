@@ -4,8 +4,7 @@ using UnityEngine;
 
 public class fx_Smoke : MonoBehaviour
 {
-    void Start()
-    {
+    void Start(){
         Destroy(gameObject, 2.0f);
     }
 

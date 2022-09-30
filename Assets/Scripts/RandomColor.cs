@@ -5,14 +5,12 @@ using UnityEngine;
 public class RandomColor : MonoBehaviour
 {
     [SerializeField] GameObject colorObject;
-    void Start()
-    {
+    void Start(){
         Color randomColor = GetRandomColor();
         colorObject.GetComponent<MeshRenderer>().material.color = randomColor;
     }
 
-    private Color GetRandomColor()
-    {
+    private Color GetRandomColor(){
         Color color = new Color(Random.Range(0f, 1f), Random.Range(0f, 1f), Random.Range(0f, 1f), 1f);
         return color;
     }

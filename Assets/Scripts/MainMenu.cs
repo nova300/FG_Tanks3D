@@ -10,8 +10,7 @@ public class MainMenu : MonoBehaviour
     [SerializeField] AudioMixer mixer;
     [SerializeField] SceneFadeController sceneFadeController;
 
-    void Start()
-    {
+    void Start(){
         mixer.SetFloat("masterVol", Mathf.Log10(PlayerPrefs.GetFloat("mainVol", 0.75f)) * 20);
         startButton.onClick.AddListener(startPressed);
         settingsButton.onClick.AddListener(settingsPressed);

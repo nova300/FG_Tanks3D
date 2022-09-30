@@ -9,7 +9,6 @@ public class TurretRotate : MonoBehaviour
     void Update()
     {
         if (playerAttrib.IsPlayerTurn()){
-        
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
             bool uiBlock = UnityEngine.EventSystems.EventSystem.current.IsPointerOverGameObject();
             if(Physics.Raycast(ray, out result, 100.0f) && !uiBlock){
