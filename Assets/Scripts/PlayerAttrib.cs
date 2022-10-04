@@ -18,7 +18,7 @@ public class PlayerAttrib : MonoBehaviour
 
         /* Act point logic */
         if(ap < 1){
-            TurnManager.GetInstance().TriggerChangeTurn();
+            turnManager.TriggerChangeTurn();
             ap = ap + apRefill;
         }
         if(ap > apMax){
@@ -69,6 +69,6 @@ public class PlayerAttrib : MonoBehaviour
     }
 
     public bool IsPlayerTurn(){
-        return TurnManager.GetInstance().IsItPlayerTurn(playerIndex);
+        return turnManager.IsItPlayerTurn(playerIndex);
     }
 }
