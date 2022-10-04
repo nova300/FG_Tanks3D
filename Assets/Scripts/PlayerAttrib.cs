@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PlayerAttrib : MonoBehaviour
 {
-    [SerializeField] public int hp=100,ap=10,apRefill=10,apMax=10,mode;
+    [SerializeField] public int hp=100,ap=10,apRefill=10,apMax=10;
     [SerializeField] public TurnManager turnManager;
     
     public bool dead;
@@ -28,31 +28,31 @@ public class PlayerAttrib : MonoBehaviour
         /* Health point logic */
         if(hp < 1 && dead == false){
             dead = true;
-            turnManager.playerKill();
+            turnManager.PlayerKill();
         }
 
         if (IsPlayerTurn()){
-            turnManager.hud.setHud(hp, ap);
+            turnManager.hud.SetHud(hp, ap);
         }
 
         
 
     }
 
-    public int getHP(){
+    public int GetHP(){
         return hp;
     }
 
-    public void damage(int amount){
+    public void Damage(int amount){
         hp = hp - amount;
         Debug.Log("player " + playerIndex + " damaged for " + amount + " points");
     }
 
-    public int getAP(){
+    public int GetAP(){
         return ap;
     }
 
-    public bool apIsMoveAllowed(int cost){
+    public bool ApIsMoveAllowed(int cost){
         if(ap >= cost && cost > 0){
             return true;
         } else {
@@ -60,7 +60,7 @@ public class PlayerAttrib : MonoBehaviour
         }
     }
 
-    public void deductAP(int amount){
+    public void DeductAP(int amount){
         ap = ap - amount;
     }
 
@@ -70,9 +70,5 @@ public class PlayerAttrib : MonoBehaviour
 
     public bool IsPlayerTurn(){
         return TurnManager.GetInstance().IsItPlayerTurn(playerIndex);
-    }
-
-    public bool getDead(){
-        return dead;
     }
 }

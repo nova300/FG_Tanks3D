@@ -10,11 +10,11 @@ public class CameraController : MonoBehaviour
         transform.rotation = target.transform.rotation;
         transform.position = target.transform.position;
     }
-    public void setCamera(Transform nTarget){
+    public void SetCamera(Transform nTarget){
         target = nTarget;
     }
 
-    public void setIdle(){
+    public void SetIdle(){
         target = idleCamera.transform;
     }
 }

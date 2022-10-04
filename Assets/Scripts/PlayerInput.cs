@@ -9,7 +9,6 @@ public class PlayerInput : MonoBehaviour
     [SerializeField] Toggle moveButton, rocketButton, shellButton;
     PlayerAttrib playerAttrib;
     [SerializeField] float camSpeed = 50;
-    bool moveEnable;
     public enum Mode{
         Nothing,
         Move,
@@ -21,15 +20,15 @@ public class PlayerInput : MonoBehaviour
 
     void Start(){
         playerAttrib = playerActions.playerAttrib;
-        moveButton.onValueChanged.AddListener(movePressed);
-        shellButton.onValueChanged.AddListener(shellPressed);
-        rocketButton.onValueChanged.AddListener(rocketPressed);
+        moveButton.onValueChanged.AddListener(MovePressed);
+        shellButton.onValueChanged.AddListener(ShellPressed);
+        rocketButton.onValueChanged.AddListener(RocketPressed);
     }
 
-    private void movePressed(bool active){
+    private void MovePressed(bool active){
             if(playerAttrib.IsPlayerTurn() && !isWaiting){
                 if(currentMode == Mode.Move && !active){
-                    playerActions.cleanExitMoveMode();
+                    playerActions.CleanExitMoveMode();
                     currentMode = Mode.Nothing;
                 } else {
                     currentMode = Mode.Move;
@@ -38,24 +37,24 @@ public class PlayerInput : MonoBehaviour
                 moveButton.SetIsOnWithoutNotify(true);
             }
     }
-    private void shellPressed(bool active){
+    private void ShellPressed(bool active){
             if(playerAttrib.IsPlayerTurn() && !isWaiting){
                 if(currentMode == Mode.Shell && !active){
                     currentMode = Mode.Nothing;
                 } else {
-                    playerActions.cleanExitMoveMode();
+                    playerActions.CleanExitMoveMode();
                     currentMode = Mode.Shell;
                 }
         } else if (playerAttrib.IsPlayerTurn() && active){
                 shellButton.isOn = false;
         }
     }
-    private void rocketPressed(bool active){
+    private void RocketPressed(bool active){
             if(playerAttrib.IsPlayerTurn() && !isWaiting){
                 if(currentMode == Mode.Rocket && !active){
                     currentMode = Mode.Nothing;
                 } else {
-                    playerActions.cleanExitMoveMode();
+                    playerActions.CleanExitMoveMode();
                     currentMode = Mode.Rocket;
                 }
         } else if (playerAttrib.IsPlayerTurn() && active){
@@ -72,22 +71,22 @@ public class PlayerInput : MonoBehaviour
                     bool uiBlock = UnityEngine.EventSystems.EventSystem.current.IsPointerOverGameObject();
                     if(Physics.Raycast(ray, out result, 100.0f) && !uiBlock){
                         if(currentMode == Mode.Move){
-                            playerActions.setDestination(result);
+                            playerActions.SetDestination(result);
                         } else if(currentMode == Mode.Rocket){
-                            playerActions.shootRocket(result);
+                            playerActions.ShootRocket(result);
                         } else if(currentMode == Mode.Shell){
-                            playerActions.shootShell(result);
+                            playerActions.ShootShell(result);
                         }
                     }
                 }
 
                 if(Input.GetMouseButtonDown(1) && currentMode == Mode.Move){
                     isWaiting = true;
-                    playerActions.goDestination();
+                    playerActions.GoDestination();
                 }
 
             } else if(currentMode == Mode.Move){
-                if(playerActions.isMoving() == false){
+                if(playerActions.IsMoving() == false){
                     isWaiting = false;
                 }
             } else{
@@ -95,7 +94,7 @@ public class PlayerInput : MonoBehaviour
             }
 
             float rotation = Input.GetAxis("Horizontal") * camSpeed;
-            playerActions.rotateCam(rotation);
+            playerActions.RotateCam(rotation);
         } else if (!(currentMode == 0)){
             currentMode = 0;
         }

@@ -19,25 +19,25 @@ public class GameOver : MonoBehaviour
     }
 
     void Start(){
-        restart.onClick.AddListener(restartPressed);
-        exit.onClick.AddListener(exitPressed);
+        restart.onClick.AddListener(RestartPressed);
+        exit.onClick.AddListener(ExitPressed);
     }
 
-    void restartPressed(){
-        StartCoroutine(sceneFadeController.fadeOutAndLoadScene("Island"));
+    void RestartPressed(){
+        StartCoroutine(sceneFadeController.FadeOutAndLoadScene("Island"));
     }
 
-    void exitPressed(){
-        StartCoroutine(sceneFadeController.fadeOutAndLoadScene("MainMenu"));
+    void ExitPressed(){
+        StartCoroutine(sceneFadeController.FadeOutAndLoadScene("MainMenu"));
     }
     void Update(){
         float fadeAmount;
-        Color objectColor = getColor();
+        Color objectColor = GetColor();
         if (!invert){
                 if (objectColor.a < 1) {
                     fadeAmount = objectColor.a + (fadeSpeed * Time.deltaTime);
                     objectColor = new Color(objectColor.r, objectColor.g, objectColor.b, fadeAmount);
-                    setColor(objectColor);
+                    SetColor(objectColor);
                 } else {
                     invert = true;
                 }
@@ -45,7 +45,7 @@ public class GameOver : MonoBehaviour
                 if (objectColor.a > 0){
                     fadeAmount = objectColor.a - (fadeSpeed * Time.deltaTime);
                     objectColor = new Color(objectColor.r, objectColor.g, objectColor.b, fadeAmount);
-                    setColor(objectColor);
+                    SetColor(objectColor);
                 } else {
                     invert = false;
                 }
@@ -53,7 +53,7 @@ public class GameOver : MonoBehaviour
             }
     }
 
-    void setColor(Color newColor){
+    void SetColor(Color newColor){
         if (winner == 1){
             p1Win.color = newColor;
         } else if (winner == 2){
@@ -63,7 +63,7 @@ public class GameOver : MonoBehaviour
         }
     }
 
-    Color getColor(){
+    Color GetColor(){
         if (winner == 1){
             return p1Win.color;
         } else if (winner == 2){

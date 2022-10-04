@@ -12,16 +12,16 @@ public class MainMenu : MonoBehaviour
 
     void Start(){
         mixer.SetFloat("masterVol", Mathf.Log10(PlayerPrefs.GetFloat("mainVol", 0.75f)) * 20);
-        startButton.onClick.AddListener(startPressed);
-        settingsButton.onClick.AddListener(settingsPressed);
+        startButton.onClick.AddListener(StartPressed);
+        settingsButton.onClick.AddListener(SettingsPressed);
     }
 
-    void startPressed(){
-        StartCoroutine(sceneFadeController.fadeOutAndLoadScene("Island"));
+    void StartPressed(){
+        StartCoroutine(sceneFadeController.FadeOutAndLoadScene("Island"));
     }
 
-    void settingsPressed(){
-        StartCoroutine(sceneFadeController.fadeOutAndLoadScene("SettingsMenu"));
+    void SettingsPressed(){
+        StartCoroutine(sceneFadeController.FadeOutAndLoadScene("SettingsMenu"));
     }
 
     

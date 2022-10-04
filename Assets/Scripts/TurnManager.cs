@@ -24,7 +24,7 @@ public class TurnManager : MonoBehaviour
             nextPlayerIndex = 2;
             playerOne.SetPlayerTurn(1);
             playerTwo.SetPlayerTurn(2);
-            cameraController.setCamera(playerOneCam);
+            cameraController.SetCamera(playerOneCam);
         }
     }
 
@@ -39,10 +39,10 @@ public class TurnManager : MonoBehaviour
         }
         if (gameOverTurn && !stop){
             stop = true;
-            winner = getWinner();
+            winner = GetWinner();
             PlayerPrefs.SetInt("winner", winner);
             TriggerChangeTurn();
-            StartCoroutine(sceneFadeController.fadeOutAndLoadScene("GameOver"));
+            StartCoroutine(sceneFadeController.FadeOutAndLoadScene("GameOver"));
         }
     }
 
@@ -58,30 +58,30 @@ public class TurnManager : MonoBehaviour
     }
 
     public void TriggerChangeTurn(){
-        hud.noHud();
-        cameraController.setIdle();
+        hud.NoHud();
+        cameraController.SetIdle();
         waitingForNextTurn = true;
     }
 
     private void ChangeTurn(){
         if (currentPlayerIndex == 1){
             currentPlayerIndex = 2;
-            cameraController.setCamera(playerTwoCam);
+            cameraController.SetCamera(playerTwoCam);
         }
         else if (currentPlayerIndex == 2){
             currentPlayerIndex = 1;
-            cameraController.setCamera(playerOneCam);
+            cameraController.SetCamera(playerOneCam);
         }
     }
 
-    public void playerKill(){
+    public void PlayerKill(){
         numberOfPlayers--;
         if (numberOfPlayers <= 1){
             gameOverTurn = true;
         }
     }
 
-    private int getWinner(){
+    private int GetWinner(){
         if (!playerOne.dead){
             return 1;
         } else if (!playerTwo.dead){

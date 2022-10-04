@@ -12,13 +12,13 @@ public class SettingsMenu : MonoBehaviour
     [SerializeField] SceneFadeController sceneFadeController;
 
     void Start(){
-        exitButton.onClick.AddListener(exitPressed);
+        exitButton.onClick.AddListener(ExitPressed);
         slider.value = PlayerPrefs.GetFloat("mainVol", 0.75f);
     }
 
 
-    void exitPressed(){
-        StartCoroutine(sceneFadeController.fadeOutAndLoadScene("MainMenu"));
+    void ExitPressed(){
+        StartCoroutine(sceneFadeController.FadeOutAndLoadScene("MainMenu"));
     }
 
     public void SetLevel (float sliderValue){

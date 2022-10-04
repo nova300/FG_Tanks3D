@@ -7,16 +7,15 @@ using UnityEngine.SceneManagement;
 public class SceneFadeController : MonoBehaviour
 {
     [SerializeField] Image fadeOutImage;
-    private IEnumerator coroutine;
     private bool isActive;
 
     void OnEnable(){
         isActive = true;
-        StartCoroutine(fadeOut(false));
+        StartCoroutine(FadeOut(false));
     }
 
 
-    public IEnumerator fadeOut(bool fade = true, float fadeSpeed = 0.5f){
+    public IEnumerator FadeOut(bool fade = true, float fadeSpeed = 0.5f){
         Color objectColor = fadeOutImage.color;
         float fadeAmount;
         if(fade){
@@ -37,10 +36,10 @@ public class SceneFadeController : MonoBehaviour
             isActive = false;
         }
     }
-    public IEnumerator fadeOutAndLoadScene(string sceneToLoad, bool fade = true, float fadeSpeed = 0.5f){
+    public IEnumerator FadeOutAndLoadScene(string sceneToLoad, bool fade = true, float fadeSpeed = 0.5f){
         if (!isActive){
             isActive = true;
-            yield return fadeOut(fade, fadeSpeed);
+            yield return FadeOut(fade, fadeSpeed);
             SceneManager.LoadScene(sceneToLoad);
         }
     }

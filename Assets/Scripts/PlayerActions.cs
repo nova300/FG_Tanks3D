@@ -20,8 +20,8 @@ public class PlayerActions : MonoBehaviour
     public void Update(){
         if(agent.hasPath && agent.isStopped){
             moveCost = (int)(6 * (agent.remainingDistance / 10));
-            if (playerAttrib.apIsMoveAllowed(moveCost)){
-                playerAttrib.turnManager.hud.setMoveCost(moveCost);
+            if (playerAttrib.ApIsMoveAllowed(moveCost)){
+                playerAttrib.turnManager.hud.SetMoveCost(moveCost);
                 if (moveIndicator == null){
                     moveIndicator = Instantiate(indicator);
                     moveIndicator.transform.position = agent.destination;
@@ -29,13 +29,13 @@ public class PlayerActions : MonoBehaviour
                     moveIndicator.transform.position = agent.destination;
                 }
             } else  {
-                playerAttrib.turnManager.hud.setMoveCost(0);
-                destroyMoveIndicator();
+                playerAttrib.turnManager.hud.SetMoveCost(0);
+                DestroyMoveIndicator();
             }  
         } else if(!agent.hasPath) {
-            destroyMoveIndicator();
+            DestroyMoveIndicator();
             if (!agent.isStopped){
-                playerAttrib.deductAP(moveCost);
+                playerAttrib.DeductAP(moveCost);
                 agent.isStopped = true;
             }
             
@@ -43,9 +43,9 @@ public class PlayerActions : MonoBehaviour
     }
 
 
-    public void shootRocket(RaycastHit result){
-        if(playerAttrib.apIsMoveAllowed(rocketCost)){
-            playerAttrib.deductAP(rocketCost);
+    public void ShootRocket(RaycastHit result){
+        if(playerAttrib.ApIsMoveAllowed(rocketCost)){
+            playerAttrib.DeductAP(rocketCost);
             GameObject newRocket = Instantiate(rocket);
             newRocket.transform.position = offset.position;
             newRocket.transform.rotation = offset.rotation;
@@ -55,9 +55,9 @@ public class PlayerActions : MonoBehaviour
         }
     }
 
-    public void shootShell(RaycastHit result){
-        if(playerAttrib.apIsMoveAllowed(atrifleCost)){
-            playerAttrib.deductAP(atrifleCost);
+    public void ShootShell(RaycastHit result){
+        if(playerAttrib.ApIsMoveAllowed(atrifleCost)){
+            playerAttrib.DeductAP(atrifleCost);
             GameObject newSmoke = Instantiate(smoke);
             newSmoke.transform.position = barrel.position;
             
@@ -67,7 +67,7 @@ public class PlayerActions : MonoBehaviour
             if(hit){
                 GameObject otherObject = rifleResult.transform.gameObject;
                 if(otherObject.TryGetComponent(out PlayerAttrib test)){
-                    otherObject.GetComponent<PlayerAttrib>().damage(atrifleDamage);
+                    otherObject.GetComponent<PlayerAttrib>().Damage(atrifleDamage);
                     GameObject newExplosion = Instantiate(explosion);
                     newExplosion.transform.position = rifleResult.point;
                 }
@@ -79,19 +79,19 @@ public class PlayerActions : MonoBehaviour
     }
 
 
-    public void setDestination(RaycastHit result){
+    public void SetDestination(RaycastHit result){
         agent.isStopped = true;
         agent.SetDestination(result.point);
     }
 
-    public void goDestination(){
-        if(playerAttrib.apIsMoveAllowed(moveCost)){
-            playerAttrib.turnManager.hud.setMoveCost(0);
+    public void GoDestination(){
+        if(playerAttrib.ApIsMoveAllowed(moveCost)){
+            playerAttrib.turnManager.hud.SetMoveCost(0);
             agent.isStopped = false;
         }
     }
 
-    public bool isMoving(){
+    public bool IsMoving(){
         if(agent.hasPath && !agent.isStopped){
             return true;
         } else {
@@ -99,20 +99,20 @@ public class PlayerActions : MonoBehaviour
         }
     }
 
-    public void cleanExitMoveMode(){
+    public void CleanExitMoveMode(){
         agent.isStopped = true;
         agent.ResetPath();
         moveCost = 0;
-        playerAttrib.turnManager.hud.setMoveCost(moveCost);
+        playerAttrib.turnManager.hud.SetMoveCost(moveCost);
     }
 
-    public void destroyMoveIndicator(){
+    public void DestroyMoveIndicator(){
         if (!(moveIndicator == null)){
             Destroy(moveIndicator);
         }
     }
 
-    public void rotateCam(float speed){
+    public void RotateCam(float speed){
         camRotation.Rotate(0, speed * Time.deltaTime, 0);
     }
 }

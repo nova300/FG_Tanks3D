@@ -18,7 +18,7 @@ public class Hud : MonoBehaviour
         }
     }
 
-    public void setHud(int hpVal, int apVal){
+    public void SetHud(int hpVal, int apVal){
         hudOn = true;
         if(moveCost >= 1){
             ap.SetText("AP: " + apVal + " (-" + moveCost + ")");
@@ -28,14 +28,14 @@ public class Hud : MonoBehaviour
         hp.SetText("HP: " + hpVal);
     }
 
-    public void noHud(){
+    public void NoHud(){
         hudOn = false;
         ap.SetText("");
         hp.SetText("");
         toggleGroup.SetAllTogglesOff();
     }
 
-    public void setMoveCost(int newMoveCost){
+    public void SetMoveCost(int newMoveCost){
         moveCost = newMoveCost;
     }
 }
