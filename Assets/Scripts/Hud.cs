@@ -9,7 +9,7 @@ public class Hud : MonoBehaviour
 {
     [SerializeField] TextMeshProUGUI hp, ap;
     [SerializeField] ToggleGroup toggleGroup;
-    int moveCost;
+    int hpVal,apVal,moveCost;
     bool hudOn;
 
     void Update(){
@@ -18,14 +18,18 @@ public class Hud : MonoBehaviour
         }
     }
 
-    public void SetHud(int hpVal, int apVal){
+    public void SetHud(int n_hpVal, int n_apVal, bool force = true){
         hudOn = true;
-        if(moveCost >= 1){
-            ap.SetText("AP: " + apVal + " (-" + moveCost + ")");
-        } else {
-            ap.SetText("AP: " + apVal);
+        if(n_hpVal != hpVal || n_apVal != apVal || force){
+            hpVal = n_hpVal;
+            apVal = n_apVal;
+            if(moveCost >= 1){
+                ap.SetText("AP: " + apVal + " (-" + moveCost + ")");
+            } else {
+                ap.SetText("AP: " + apVal);
+            }
+            hp.SetText("HP: " + hpVal);
         }
-        hp.SetText("HP: " + hpVal);
     }
 
     public void NoHud(){
@@ -36,6 +40,9 @@ public class Hud : MonoBehaviour
     }
 
     public void SetMoveCost(int newMoveCost){
-        moveCost = newMoveCost;
+        if(moveCost != newMoveCost){
+            moveCost = newMoveCost;
+            SetHud(hpVal, apVal, true);
+        }
     }
 }
