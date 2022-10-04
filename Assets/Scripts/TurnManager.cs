@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class TurnManager : MonoBehaviour
 {
-    private static TurnManager instance;
     [SerializeField] private PlayerAttrib playerOne, playerTwo;
     [SerializeField] private int numberOfPlayers = 2;
     [SerializeField] private CameraController cameraController;
@@ -18,14 +17,11 @@ public class TurnManager : MonoBehaviour
     private float turnDelay;
 
     private void Awake(){
-        if (instance == null){
-            instance = this;
-            currentPlayerIndex = 1;
-            nextPlayerIndex = 2;
-            playerOne.SetPlayerTurn(1);
-            playerTwo.SetPlayerTurn(2);
-            cameraController.SetCamera(playerOneCam);
-        }
+        currentPlayerIndex = 1;
+        nextPlayerIndex = 2;
+        playerOne.SetPlayerTurn(1);
+        playerTwo.SetPlayerTurn(2);
+        cameraController.SetCamera(playerOneCam);
     }
 
     private void Update(){
@@ -51,10 +47,6 @@ public class TurnManager : MonoBehaviour
             return false;
         }
         return index == currentPlayerIndex;
-    }
-
-    public static TurnManager GetInstance(){
-        return instance;
     }
 
     public void TriggerChangeTurn(){
