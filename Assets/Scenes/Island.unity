@@ -1825,6 +1825,10 @@ PrefabInstance:
       propertyPath: m_Colors.m_DisabledColor.r
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 1556176530474381112, guid: 8b4e6f6310e14c640bffd9d08ae541ef, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1556176530474381114, guid: 8b4e6f6310e14c640bffd9d08ae541ef, type: 3}
       propertyPath: m_Color.b
       value: 0.5651056

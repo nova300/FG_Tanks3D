@@ -276,7 +276,6 @@ MonoBehaviour:
   ap: 10
   apRefill: 10
   apMax: 10
-  mode: 0
   turnManager: {fileID: 0}
   dead: 0
 --- !u!54 &-6518443651313129610
@@ -636,6 +635,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 64e0eeed44c2095479eb87d337d69b62, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerActions: {fileID: 0}
 --- !u!1 &4254652818963668352
 GameObject:
   m_ObjectHideFlags: 0
@@ -746,3 +746,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 64e0eeed44c2095479eb87d337d69b62, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerActions: {fileID: 8647422328695573042}

@@ -6,7 +6,6 @@ public class PlayerAttrib : MonoBehaviour
 {
     [SerializeField] public int hp=100,ap=10,apRefill=10,apMax=10;
     [SerializeField] public TurnManager turnManager;
-    
     public bool dead;
     private int playerIndex;
 
@@ -18,7 +17,7 @@ public class PlayerAttrib : MonoBehaviour
 
         /* Act point logic */
         if(ap < 1){
-            TurnManager.GetInstance().TriggerChangeTurn();
+            turnManager.TriggerChangeTurn();
             ap = ap + apRefill;
         }
         if(ap > apMax){
@@ -34,9 +33,6 @@ public class PlayerAttrib : MonoBehaviour
         if (IsPlayerTurn()){
             turnManager.hud.SetHud(hp, ap);
         }
-
-        
-
     }
 
     public int GetHP(){
@@ -69,6 +65,6 @@ public class PlayerAttrib : MonoBehaviour
     }
 
     public bool IsPlayerTurn(){
-        return TurnManager.GetInstance().IsItPlayerTurn(playerIndex);
+        return turnManager.IsItPlayerTurn(playerIndex);
     }
 }

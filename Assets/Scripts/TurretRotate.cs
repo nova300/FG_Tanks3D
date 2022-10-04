@@ -6,7 +6,7 @@ public class TurretRotate : MonoBehaviour
 {
     [SerializeField] PlayerAttrib playerAttrib;
     private RaycastHit result;
-    void Update()
+    void FixedUpdate()
     {
         if (playerAttrib.IsPlayerTurn()){
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
