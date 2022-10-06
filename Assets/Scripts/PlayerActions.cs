@@ -9,8 +9,9 @@ public class PlayerActions : MonoBehaviour
     [SerializeField] private GameObject rocket,smoke,explosion,indicator;
     [SerializeField] private Transform offset, barrel, camRotation;
     [SerializeField] private int rocketCost=1, atrifleCost=5, atrifleDamage=30;
-    [SerializeField] private NavMeshAgent agent;
+    [SerializeField] public NavMeshAgent agent;
     [SerializeField] private AudioSource sndCannon;
+    [SerializeField] private TankRotate tankRotate;
     private int moveCost;
     private GameObject moveIndicator;
 
@@ -82,6 +83,7 @@ public class PlayerActions : MonoBehaviour
     public void SetDestination(RaycastHit result){
         agent.isStopped = true;
         agent.SetDestination(result.point);
+        tankRotate.SetRotation(result.point);
     }
 
     public void GoDestination(){
