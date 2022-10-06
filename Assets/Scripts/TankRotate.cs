@@ -14,14 +14,11 @@ public class TankRotate : MonoBehaviour
             Quaternion lookRotation = Quaternion.LookRotation(direction);
             lookRotation.x = 0;
             lookRotation.z = 0;
-            Quaternion newRotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime * 2.5f);  
-            
-            transform.rotation = newRotation;
-            Debug.Log(direction.y);
-            Debug.Log(transform.rotation.y);
-            if (transform.rotation.y == direction.y){
-                
+            Quaternion newRotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime * 2.5f);
+            if (transform.rotation.y == newRotation.y){
                 isActive = false;
+            } else {
+                transform.rotation = newRotation;
             }
             
         }
@@ -30,6 +27,5 @@ public class TankRotate : MonoBehaviour
     public void SetRotation(Vector3 rotationTarget){
         point = rotationTarget;
         isActive = true;
-        
     }
 }

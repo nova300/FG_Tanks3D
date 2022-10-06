@@ -81,9 +81,9 @@ public class PlayerActions : MonoBehaviour
 
 
     public void SetDestination(RaycastHit result){
+        tankRotate.SetRotation(result.point);
         agent.isStopped = true;
         agent.SetDestination(result.point);
-        tankRotate.SetRotation(result.point);
     }
 
     public void GoDestination(){
