@@ -125,6 +125,7 @@ GameObject:
   - component: {fileID: 879309688429344254}
   - component: {fileID: 879309688429344195}
   - component: {fileID: 879309688429344192}
+  - component: {fileID: 3423099387729822421}
   m_Layer: 0
   m_Name: Body
   m_TagString: Untagged
@@ -197,6 +198,18 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!114 &3423099387729822421
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 879309688429344255}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 64e0eeed44c2095479eb87d337d69b62, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &879309688504941004
 GameObject:
   m_ObjectHideFlags: 0
@@ -251,7 +264,7 @@ NavMeshAgent:
   m_Speed: 2
   m_Acceleration: 4
   avoidancePriority: 50
-  m_AngularSpeed: 100
+  m_AngularSpeed: 0
   m_StoppingDistance: 0
   m_AutoTraverseOffMeshLink: 0
   m_AutoBraking: 1
@@ -276,7 +289,6 @@ MonoBehaviour:
   ap: 10
   apRefill: 10
   apMax: 10
-  mode: 0
   turnManager: {fileID: 0}
   dead: 0
 --- !u!54 &-6518443651313129610
@@ -333,6 +345,7 @@ MonoBehaviour:
   atrifleDamage: 30
   agent: {fileID: 870270222825940358}
   sndCannon: {fileID: 7649492170260610166}
+  tankRotate: {fileID: 1928399794671587504}
 --- !u!114 &4842314025879521117
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -645,6 +658,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 915809425578187320}
+  - component: {fileID: 6098856118875900195}
   m_Layer: 0
   m_Name: cameraFocusPoint
   m_TagString: Untagged
@@ -668,6 +682,23 @@ Transform:
   m_Father: {fileID: 879309688504941007}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1818360609 &6098856118875900195
+RotationConstraint:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4254652818963668352}
+  m_Enabled: 1
+  m_Weight: 1
+  m_RotationAtRest: {x: 0, y: 0, z: 0}
+  m_RotationOffset: {x: 0, y: 0, z: 0}
+  m_AffectRotationX: 1
+  m_AffectRotationY: 1
+  m_AffectRotationZ: 1
+  m_IsContraintActive: 1
+  m_IsLocked: 1
+  m_Sources: []
 --- !u!1 &8331009658365657363
 GameObject:
   m_ObjectHideFlags: 0
@@ -708,7 +739,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6989213786219041849}
-  - component: {fileID: 493022638108145368}
+  - component: {fileID: 1928399794671587504}
   m_Layer: 0
   m_Name: Model
   m_TagString: Untagged
@@ -734,7 +765,7 @@ Transform:
   m_Father: {fileID: 879309688504941007}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &493022638108145368
+--- !u!114 &1928399794671587504
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -743,6 +774,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 8885555746273026456}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 64e0eeed44c2095479eb87d337d69b62, type: 3}
+  m_Script: {fileID: 11500000, guid: 2235b633ae2c76e45885d59a6bf2e6e6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerAttrib: {fileID: 6325162766717133573}
