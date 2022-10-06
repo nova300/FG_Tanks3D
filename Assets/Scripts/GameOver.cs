@@ -15,7 +15,6 @@ public class GameOver : MonoBehaviour
 
     void OnEnable(){
         winner = PlayerPrefs.GetInt("winner");
-        Debug.Log(winner);
     }
 
     void Start(){
