@@ -12,7 +12,7 @@ public class TurnManager : MonoBehaviour
     [SerializeField] private Transform playerOneCam, playerTwoCam;
     [SerializeField] public Hud hud;
     
-    public int currentPlayerIndex, nextPlayerIndex, winner;
+    public int currentPlayerIndex, nextPlayerIndex, winner, topscore;
     public bool waitingForNextTurn, gameOverTurn, stop;
     private float turnDelay;
 
@@ -36,7 +36,13 @@ public class TurnManager : MonoBehaviour
         if (gameOverTurn && !stop){
             stop = true;
             winner = GetWinner();
+            topscore = GetScore(winner);
+            PlayerPrefs.SetInt("currentscore", topscore);
+            if (topscore < PlayerPrefs.GetInt("topscore", 0)){
+                topscore = PlayerPrefs.GetInt("topscore", 0);
+            }
             PlayerPrefs.SetInt("winner", winner);
+            PlayerPrefs.SetInt("topscore", topscore);
             TriggerChangeTurn();
             StartCoroutine(sceneFadeController.FadeOutAndLoadScene("GameOver"));
         }
@@ -81,5 +87,33 @@ public class TurnManager : MonoBehaviour
         } else {
             return 0;
         }
+    }
+
+    public void Score(int damage, int index){
+        int points = 10;
+        if (damage == 40){
+            points = points + 500;
+        } else if (damage > 11){
+            points = points + 250;
+        } else if (damage > 8){
+            points = points + 100;
+        } 
+
+        if (index == 1){
+            playerTwo.AddScore(points);
+        } else if (index == 2){
+            playerOne.AddScore(points);
+        }
+    }
+
+    public int GetScore(int index){
+        if (index == 1){
+            return playerOne.score;
+        } else if (index == 2){
+            return playerTwo.score;
+        }
+
+
+        return 0;
     }
 }

@@ -2,12 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class GameOver : MonoBehaviour
 {
     [SerializeField] private Image p1Win,p2Win,draw;
     [SerializeField] private Button restart, exit;
     [SerializeField] private SceneFadeController sceneFadeController;
+    [SerializeField] private TextMeshProUGUI highScore, currentScore;
     public int winner = 1;
     public float fadeSpeed = 1.0f;
     private bool invert;
@@ -15,6 +17,8 @@ public class GameOver : MonoBehaviour
 
     void OnEnable(){
         winner = PlayerPrefs.GetInt("winner");
+        highScore.SetText("High Score: " + PlayerPrefs.GetInt("topscore", 0));
+        currentScore.SetText("Score: " + PlayerPrefs.GetInt("currentscore", 0));
     }
 
     void Start(){
