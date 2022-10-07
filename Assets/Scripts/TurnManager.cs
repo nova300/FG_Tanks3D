@@ -91,7 +91,7 @@ public class TurnManager : MonoBehaviour
 
     public void Score(int damage, int index){
         int points = 10;
-        if (damage == 40){
+        if (damage == 30){
             points = points + 500;
         } else if (damage > 11){
             points = points + 250;
